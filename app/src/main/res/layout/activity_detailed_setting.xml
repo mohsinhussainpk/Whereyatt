@@ -270,6 +270,7 @@
         android:id="@+id/add_contact"
         android:background="?selectableItemBackgroundBorderless"
         android:clickable="true"
+        android:onClick="onClick"
 
         />
 
