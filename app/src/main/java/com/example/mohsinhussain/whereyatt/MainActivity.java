@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -63,7 +64,26 @@ public class MainActivity extends AppCompatActivity {
                         "Message",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
+
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                builder1.setMessage("Who do you want to call?");
+                                builder1.setCancelable(true);
+
+                                builder1.setPositiveButton(
+                                        "Message",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+                                                Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+                                                smsIntent.setType("vnd.android-dir/mms-sms");
+                                                smsIntent.putExtra("address","090078601");
+                                                smsIntent.putExtra("sms_body","your desired message");
+                                                startActivity(smsIntent);
+
+                                            }
+                                        });
+                                AlertDialog alert12 = builder1.create();
+                                alert12.show();
                             }
                         });
 
@@ -71,7 +91,28 @@ public class MainActivity extends AppCompatActivity {
                         "Call",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                builder1.setMessage("Who do you want to call?");
+                                builder1.setCancelable(true);
+
+                                builder1.setPositiveButton(
+                                        "Call",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+                                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                                                startActivity(intent);
+
+                                                Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+                                                smsIntent.setType("vnd.android-dir/mms-sms");
+                                                smsIntent.putExtra("address","090078601");
+                                                smsIntent.putExtra("sms_body","your desired message");
+                                                startActivity(smsIntent);
+
+                                            }
+                                        });
+                                AlertDialog alert12 = builder1.create();
+                                alert12.show();
                             }
                         });
 
