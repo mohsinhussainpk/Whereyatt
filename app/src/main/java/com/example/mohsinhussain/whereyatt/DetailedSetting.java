@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,12 +20,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class DetailedSetting extends AppCompatActivity {
 
     private TextView addcontact;
     public static final int PICK_CONTACT = 1;
     MyDBHandler dbHandler;
     ImageView deletebutton;
+
 
 
 
@@ -112,17 +116,10 @@ public class DetailedSetting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_setting);
         TextView txtProduct = (TextView) findViewById(R.id.contact_name);
+
         deletebutton = (ImageView) findViewById(R.id.delete);
 
-        deletebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-
-
-            }
-        });
 
        // dbHandler = new MyDBHandler(this, null, null, 1);
       //  printDatabase();
@@ -130,7 +127,7 @@ public class DetailedSetting extends AppCompatActivity {
         // getting attached intent data
         String product = i.getStringExtra("product");
         // displaying selected product name
-        txtProduct.setText(product);
+        //txtProduct.setText(product);
 
 
 

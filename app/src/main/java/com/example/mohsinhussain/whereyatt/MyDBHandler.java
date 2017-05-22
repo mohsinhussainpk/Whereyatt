@@ -82,12 +82,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
     //Print out the database as a string
-/*
+
     public String databaseToString() {
 
         String dbString = " ";
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE 1";
+        String query = "SELECT "+ COLUMN_CONTACTS_NAME + "  FROM " + TABLE_NAME + " WHERE 1";
 
         //Cursor point to a location in your results
 
@@ -106,7 +106,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return dbString;
 
     }
-    */
+
 }
 
 

@@ -189,74 +189,11 @@
     </LinearLayout>
 
 
-
-
-
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:id="@+id/c_info_layout"
-        android:layout_height="wrap_content">
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
-            android:padding="10dp"
-            android:id="@+id/contact_layout"
-            android:src="@drawable/phone_call"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_height="match_parent">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="fa"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="18dp"
-                android:padding="2dp"
-                android:id="@+id/contact_name"
-                android:textAllCaps="true"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:text="000"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="18dp"
-                android:id="@+id/contact_num" />
-
-        </LinearLayout>
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
-            android:src="@drawable/delete"
-            android:padding="10dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:id="@+id/delete"
-            />
-
-
-    </LinearLayout>
-
-
-
+        android:layout_height="wrap_content"
+        android:id="@+id/listView2"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
