@@ -1,8 +1,11 @@
 package com.example.mohsinhussain.whereyatt;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +22,9 @@ public class DetailedSetting extends AppCompatActivity {
 
     private TextView addcontact;
     public static final int PICK_CONTACT = 1;
+    MyDBHandler dbHandler;
+    ImageView deletebutton;
+
 
 
     public void onClick(View v) {
@@ -27,7 +33,8 @@ public class DetailedSetting extends AppCompatActivity {
         intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, PICK_CONTACT);
-        }
+
+                   }
 
     }
 
@@ -63,21 +70,62 @@ public class DetailedSetting extends AppCompatActivity {
                         }
                         String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-                       addcontact.setText(name + " : " + cNumber);
-                        
+
+
+//                        printDatabase();
+                      // addcontact.setText(name + " : " + cNumber);
+
+
+                        Whereyatt whereyatt = new Whereyatt();
+
+                      //  dbHandler.addContact(whereyatt);
+                        whereyatt.set_contactname(name);
+                        String contactname = whereyatt.get_contactname();
+                        addcontact.setText(contactname);
+                      // printDatabase();
+
+
+
+
 
                     }
                 }
                 break;
         }
+
+
     }
+
+
+/*
+    public void printDatabase(){
+
+       String dbString = dbHandler.databaseToString();
+
+        addcontact.setText(dbString);
+
+    }
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_setting);
         TextView txtProduct = (TextView) findViewById(R.id.contact_name);
+        deletebutton = (ImageView) findViewById(R.id.delete);
 
+        deletebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+            }
+        });
+
+       // dbHandler = new MyDBHandler(this, null, null, 1);
+      //  printDatabase();
         Intent i = getIntent();
         // getting attached intent data
         String product = i.getStringExtra("product");

@@ -7,22 +7,25 @@ public class Whereyatt {
 
     private int _id;
     private String _location;
-    private String _contacts;
+    private String _contactname;
+    private String _contactnumber;
     private String _category;
     private boolean _sendlocation;
     private boolean _makecall;
     private boolean _makesms;
     private boolean _purchased;
+    private String _whereyatt;
 
     public Whereyatt(){
 
 
-
     }
 
-    public Whereyatt(String category) {
-        this._category = category;
+    public Whereyatt(String whereyatt) {
+
+        this._whereyatt = whereyatt;
     }
+
 
     public int get_id() {
         return _id;
@@ -40,12 +43,20 @@ public class Whereyatt {
         this._location = _location;
     }
 
-    public String get_contacts() {
-        return _contacts;
+    public String get_contactname() {
+        return _contactname;
     }
 
-    public void set_contacts(String _contacts) {
-        this._contacts = _contacts;
+    public void set_contactname(String _contactname) {
+        this._contactname = _contactname;
+    }
+
+    public String get_contactnumber() {
+        return _contactnumber;
+    }
+
+    public void set_contactnumber(String _contactnumber) {
+        this._contactnumber = _contactnumber;
     }
 
     public boolean is_makesms() {

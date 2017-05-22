@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView scaredButton;
     TextView customButton;
 
+    MyDBHandler dbHandler;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         litButton = (ImageView) findViewById(R.id.lit);
         scaredButton = (ImageView) findViewById(R.id.s);
         customButton = (TextView) findViewById(R.id.c);
+
+        dbHandler = new MyDBHandler(this, null, null, 1);
+
+
 
         settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
