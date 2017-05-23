@@ -2,13 +2,16 @@ package com.example.mohsinhussain.whereyatt;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 import android.media.Image;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
     public String cityName ="city not found";
     MyDBHandler dbHandler;
 
+    public String police = "Police Encounter";
+    public String lonely = "Lonely";
+    public String lit = "it's Lit";
+    public String scared = "Scared";
+    public String custom = "custom";
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +58,17 @@ public class MainActivity extends AppCompatActivity {
         litButton = (ImageView) findViewById(R.id.lit);
         scaredButton = (ImageView) findViewById(R.id.s);
         customButton = (TextView) findViewById(R.id.c);
+
+
+        final SharedPreferences sharedpref1 = getSharedPreferences("permission", Context.MODE_PRIVATE);
+        String boopolice = sharedpref1.getString("string2","");
+        //Toast.makeText(getBaseContext(),boopolice,Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
 
 
         GPSTracker gpsTracker = new GPSTracker(this);
@@ -65,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
             }
             //String stateName = "lahore";
 
-             cityName = addresses.get(0).getAddressLine(0);
+            cityName = addresses.get(0).getAddressLine(0);
+
 
 
             // String stateName = addresses.get(0).getAddressLine(1);
@@ -114,13 +139,27 @@ public class MainActivity extends AppCompatActivity {
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
 
+                                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                                    builder1.setMessage("Do you want to?");
+                                                    builder1.setCancelable(true);
 
-                                                    Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
-                                                    smsIntent.setType("vnd.android-dir/mms-sms");
-                                                    smsIntent.putExtra("address", "090078601");
-                                                   // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
-                                                    smsIntent.putExtra("sms_body", "i am in a police encounter at " + cityName);
-                                                    startActivity(smsIntent);
+                                                 boolean boopolice = sharedpref1.getBoolean("policesms",false);
+                                                    if(boopolice) {
+                                                        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+                                                        smsIntent.setType("vnd.android-dir/mms-sms");
+                                                        smsIntent.putExtra("address", "090078601");
+                                                        // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
+                                                        smsIntent.putExtra("sms_body", "i am in a police encounter at " + cityName);
+                                                        startActivity(smsIntent);
+                                                    }
+                                                    else{
+
+                                                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
+                                                        builder2.setMessage("map is not enabled");
+                                                        builder2.setCancelable(true);
+                                                        AlertDialog alertuser = builder2.create();
+                                                        alertuser.show();
+                                                    }
 
                                                 }
                                             });
@@ -145,11 +184,9 @@ public class MainActivity extends AppCompatActivity {
                                                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
                                                     startActivity(intent);
 
-                                                    Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
-                                                    smsIntent.setType("vnd.android-dir/mms-sms");
-                                                    smsIntent.putExtra("address", "090078601");
-                                                    smsIntent.putExtra("sms_body", "your desired message");
-                                                    startActivity(smsIntent);
+                                                    Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                                                    startActivity(callIntent);
 
                                                 }
                                             });
@@ -208,4 +245,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
+
 }

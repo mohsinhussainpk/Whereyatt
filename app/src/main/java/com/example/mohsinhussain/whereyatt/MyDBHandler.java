@@ -9,12 +9,12 @@ import android.provider.ContactsContract;
 
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "whereyatt.db";
     public static final String TABLE_NAME = "whereyatttable";
-    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_ID = "id";
     public static final String COLUMN_LOCATION = "_location";
-    public static final String COLUMN_CONTACTS_NAME = "_contactname";
+    public static final String COLUMN_CONTACTS_NAME = "contactname";
     public static final String COLUMN_CONTACTS_NUMBER = "_contactnumber";
     public static final String COLUMN_CATEGORY = "_category";
     public static final String COLUMN_SENDLOCATION = "_sendlocation";
@@ -28,10 +28,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+/*
         String query = "CREATE TABLE " + TABLE_NAME + "(" +
                  COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                 COLUMN_LOCATION + " TEXT, " +
+                 COLUMN_LOCATION + " TontactsEXT, " +
                  COLUMN_CONTACTS_NAME + " TEXT, " +
                 COLUMN_CONTACTS_NUMBER + " TEXT, " +
                 COLUMN_MAKESMS + " TEXT, " +
@@ -41,15 +41,23 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 COLUMN_PURCHASED + " TEXT);";
 
         db.execSQL(query);
-
-
+*/
+        /*
+        db.execSQL(
+                "create table " + TABLE_NAME +
+                        "(" +COLUMN_ID+ " integer primary key autoincrement, " + COLUMN_CONTACTS_NAME + " text)" );
+*/
+        db.execSQL(
+                "create table whereyatttable " +
+                        "(_id integer primary key autoincrement, _contactname text)"
+        );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
 
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
@@ -87,7 +95,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         String dbString = " ";
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT "+ COLUMN_CONTACTS_NAME + "  FROM " + TABLE_NAME + " WHERE 1";
+       // String query = "SELECT "+ COLUMN_CONTACTS_NAME + " FROM " + TABLE_NAME + " WHERE 1 = Abu" ;
+        String query = "SELECT  "+ COLUMN_CONTACTS_NAME + " FROM " + TABLE_NAME + " WHERE 1 = Abu" ;
 
         //Cursor point to a location in your results
 
@@ -95,13 +104,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
         //Move to the first row in your results
         c.moveToFirst();
 
+       dbString = c.getString(2);
+/*
         while(!c.isAfterLast()){
-            if(c.getString(c.getColumnIndex("contactsname"))!= null){
-                dbString += c.getString(c.getColumnIndex("contactsname"));
-                dbString += "\n";
+            if(c.getString(c.getColumnIndex("contactname"))!= null){
+              //  dbString += c.getString(c.getColumnIndex("contactsname"));
+              //  dbString += "\n";
+
             }
         }
-
+*/
         db.close();
         return dbString;
 
