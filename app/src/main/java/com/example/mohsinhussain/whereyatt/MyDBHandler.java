@@ -7,20 +7,18 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.provider.ContactsContract;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "whereyatt.db";
-    public static final String TABLE_NAME = "whereyatttable";
-    public static final String COLUMN_ID = "id";
-    public static final String COLUMN_LOCATION = "_location";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "name.db";
+    public static final String TABLE_NAME = "nameof";
+    public static final String COLUMN_ID = "_id";
     public static final String COLUMN_CONTACTS_NAME = "contactname";
-    public static final String COLUMN_CONTACTS_NUMBER = "_contactnumber";
-    public static final String COLUMN_CATEGORY = "_category";
-    public static final String COLUMN_SENDLOCATION = "_sendlocation";
-    public static final String COLUMN_MAKECALL = "_makecall";
-    public static final String COLUMN_MAKESMS = "_makesms";
-    public static final String COLUMN_PURCHASED = "_purchased";
+    public static final String COLUMN_CONTACTS_NUMBER = "contactnumber";
+    public static final String COLUMN_PURCHASED = "purchased";
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME , factory, DATABASE_VERSION);
@@ -28,29 +26,20 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-/*
-        String query = "CREATE TABLE " + TABLE_NAME + "(" +
-                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                 COLUMN_LOCATION + " TontactsEXT, " +
-                 COLUMN_CONTACTS_NAME + " TEXT, " +
-                COLUMN_CONTACTS_NUMBER + " TEXT, " +
-                COLUMN_MAKESMS + " TEXT, " +
-                COLUMN_CATEGORY + " TEXT, " +
-                COLUMN_SENDLOCATION + " TEXT, " +
-                COLUMN_MAKECALL + " TEXT, " +
-                COLUMN_PURCHASED + " TEXT);";
+
+        String query = "CREATE TABLE " + TABLE_NAME + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_CONTACTS_NAME + " TEXT," +
+                COLUMN_CONTACTS_NUMBER + " TEXT)";
 
         db.execSQL(query);
-*/
+
         /*
         db.execSQL(
                 "create table " + TABLE_NAME +
                         "(" +COLUMN_ID+ " integer primary key autoincrement, " + COLUMN_CONTACTS_NAME + " text)" );
 */
-        db.execSQL(
-                "create table whereyatttable " +
-                        "(_id integer primary key autoincrement, _contactname text)"
-        );
+
     }
 
     @Override
@@ -63,14 +52,55 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     //Add a new row to the database
 
-    public void addContact(Whereyatt whereyatt) {
+    // code to add the new contact
+    void addContact(Whereyatt whereyatt) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CONTACTS_NAME, whereyatt.get_contactname());
-        SQLiteDatabase db = getWritableDatabase();
+        values.put(COLUMN_CONTACTS_NAME, whereyatt.get_contactname()); // Contact Name
+        values.put(COLUMN_CONTACTS_NUMBER, whereyatt.get_contactnumber()); // Contact Phone
+
+        // Inserting Row
         db.insert(TABLE_NAME, null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+    }
+
+    public List<Whereyatt> getAllContacts() {
+        List<Whereyatt> contactList = new ArrayList<Whereyatt>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Whereyatt whereyatt = new Whereyatt();
+                whereyatt.set_id(Integer.parseInt(cursor.getString(0)));
+                whereyatt.set_contactname(cursor.getString(1));
+                whereyatt.set_contactnumber(cursor.getString(2));
+                //contact.setID(Integer.parseInt(cursor.getString(0)));
+             //   contact.setName(cursor.getString(1));
+             //   contact.setPhoneNumber(cursor.getString(2));
+                // Adding contact to list
+                contactList.add(whereyatt);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return contactList;
+    }
+
+    // Deleting single contact
+    public void deleteContact(Whereyatt whereyatt) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_CONTACTS_NAME + " = ?",
+                new String[] { String.valueOf(whereyatt.get_id())});
         db.close();
     }
+
 
 /*
     public boolean insertContact (String name, String phone) {
@@ -83,10 +113,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 */
 
-    public void deleteContact(String contactsname) {
+    public void deleteContact(String contactid) {
 
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_CONTACTS_NAME + "=\"" + contactsname + "\";" );
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + "=\"" + contactid + "\";" );
     }
 
     //Print out the database as a string

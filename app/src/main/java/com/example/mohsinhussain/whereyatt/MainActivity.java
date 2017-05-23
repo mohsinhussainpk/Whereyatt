@@ -61,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         final SharedPreferences sharedpref1 = getSharedPreferences("permission", Context.MODE_PRIVATE);
-        String boopolice = sharedpref1.getString("string2","");
         //Toast.makeText(getBaseContext(),boopolice,Toast.LENGTH_SHORT).show();
 
 
 
-
+        MyDBHandler db1 = new MyDBHandler(this,null, null, 1);
+        db1.addContact(new Whereyatt("Ravi", "9100000000"));
 
 
 
@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
             }
             //String stateName = "lahore";
 
-            cityName = addresses.get(0).getAddressLine(0);
-
+//            cityName = addresses.get(0).getAddressLine(0);
+cityName = "karachi";
 
 
             // String stateName = addresses.get(0).getAddressLine(1);
@@ -181,6 +181,205 @@ public class MainActivity extends AppCompatActivity {
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
 
+                                                    boolean boopolice = sharedpref1.getBoolean("policecall",false);
+                                                    if(boopolice) {
+                                                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                                                        startActivity(intent);
+
+                                                        Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                                                        startActivity(callIntent);
+                                                    }
+                                                    else{
+                                                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
+                                                        builder2.setMessage("call is not enabled");
+                                                        builder2.setCancelable(true);
+                                                        AlertDialog alertuser = builder2.create();
+                                                        alertuser.show();
+
+                                                    }
+
+                                                }
+                                            });
+                                    AlertDialog alert12 = builder1.create();
+                                    alert12.show();
+                                }
+                            });
+
+                    builder1.setNeutralButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
+                }
+            });
+            lonelyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //  AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+                    Activity mActivity = null;
+
+                    //  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                    builder1.setMessage("Do you want to?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Message",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                    builder1.setMessage("Who do you want to call?");
+                                    builder1.setCancelable(true);
+
+
+                                    builder1.setPositiveButton(
+                                            "Message",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                                    builder1.setMessage("Do you want to?");
+                                                    builder1.setCancelable(true);
+
+
+                                                        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+                                                        smsIntent.setType("vnd.android-dir/mms-sms");
+                                                        smsIntent.putExtra("address", "090078601");
+                                                        // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
+                                                        smsIntent.putExtra("sms_body", "i am in a police encounter at " + cityName);
+                                                        startActivity(smsIntent);
+
+
+
+                                                }
+                                            });
+                                    AlertDialog alert12 = builder1.create();
+                                    alert12.show();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Call",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                    builder1.setMessage("Who do you want to call?");
+                                    builder1.setCancelable(true);
+
+                                    builder1.setPositiveButton(
+                                            "Call",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                                                        startActivity(intent);
+
+                                                        Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                                                        startActivity(callIntent);
+
+
+                                                }
+                                            });
+                                    AlertDialog alert12 = builder1.create();
+                                    alert12.show();
+                                }
+                            });
+
+                    builder1.setNeutralButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
+                }
+            });
+            litButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //  AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+                    Activity mActivity = null;
+
+                    //  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                    builder1.setMessage("Do you want to?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Message",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                    builder1.setMessage("Who do you want to call?");
+                                    builder1.setCancelable(true);
+
+
+                                    builder1.setPositiveButton(
+                                            "Message",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                                    builder1.setMessage("Do you want to?");
+                                                    builder1.setCancelable(true);
+
+                                                    boolean boopolice = sharedpref1.getBoolean("policesms",false);
+                                                    if(boopolice) {
+                                                        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+                                                        smsIntent.setType("vnd.android-dir/mms-sms");
+                                                        smsIntent.putExtra("address", "090078601");
+                                                        // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
+                                                        smsIntent.putExtra("sms_body", "i am in a police encounter at " + cityName);
+                                                        startActivity(smsIntent);
+                                                    }
+                                                    else{
+
+                                                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
+                                                        builder2.setMessage("map is not enabled");
+                                                        builder2.setCancelable(true);
+                                                        AlertDialog alertuser = builder2.create();
+                                                        alertuser.show();
+                                                    }
+
+                                                }
+                                            });
+                                    AlertDialog alert12 = builder1.create();
+                                    alert12.show();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Call",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                    builder1.setMessage("Who do you want to call?");
+                                    builder1.setCancelable(true);
+
+                                    builder1.setPositiveButton(
+                                            "Call",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
                                                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
                                                     startActivity(intent);
 
@@ -207,30 +406,100 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-            lonelyButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    startActivity(new Intent(MainActivity.this, Setting.class));
-
-
-                }
-            });
-            litButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    startActivity(new Intent(MainActivity.this, Setting.class));
-
-
-                }
-            });
             scaredButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    startActivity(new Intent(MainActivity.this, Setting.class));
+                    //  AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+                    Activity mActivity = null;
 
+                    //  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                    builder1.setMessage("Do you want to?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Message",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                    builder1.setMessage("Who do you want to call?");
+                                    builder1.setCancelable(true);
+
+
+                                    builder1.setPositiveButton(
+                                            "Message",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                                    builder1.setMessage("Do you want to?");
+                                                    builder1.setCancelable(true);
+
+                                                    boolean boopolice = sharedpref1.getBoolean("policesms",false);
+                                                    if(boopolice) {
+                                                        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+                                                        smsIntent.setType("vnd.android-dir/mms-sms");
+                                                        smsIntent.putExtra("address", "090078601");
+                                                        // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
+                                                        smsIntent.putExtra("sms_body", "i am in a police encounter at " + cityName);
+                                                        startActivity(smsIntent);
+                                                    }
+                                                    else{
+
+                                                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
+                                                        builder2.setMessage("map is not enabled");
+                                                        builder2.setCancelable(true);
+                                                        AlertDialog alertuser = builder2.create();
+                                                        alertuser.show();
+                                                    }
+
+                                                }
+                                            });
+                                    AlertDialog alert12 = builder1.create();
+                                    alert12.show();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Call",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                    builder1.setMessage("Who do you want to call?");
+                                    builder1.setCancelable(true);
+
+                                    builder1.setPositiveButton(
+                                            "Call",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                                                    startActivity(intent);
+
+                                                    Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                                                    startActivity(callIntent);
+
+                                                }
+                                            });
+                                    AlertDialog alert12 = builder1.create();
+                                    alert12.show();
+                                }
+                            });
+
+                    builder1.setNeutralButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
 
                 }
             });
@@ -238,10 +507,99 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    startActivity(new Intent(MainActivity.this, Setting.class));
+                    //  AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+                    Activity mActivity = null;
 
+                    //  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                    builder1.setMessage("Do you want to?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Message",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                    builder1.setMessage("Who do you want to call?");
+                                    builder1.setCancelable(true);
+
+
+                                    builder1.setPositiveButton(
+                                            "Message",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                                    builder1.setMessage("Do you want to?");
+                                                    builder1.setCancelable(true);
+
+                                                    boolean boopolice = sharedpref1.getBoolean("policesms",false);
+                                                    if(boopolice) {
+                                                        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+                                                        smsIntent.setType("vnd.android-dir/mms-sms");
+                                                        smsIntent.putExtra("address", "090078601");
+                                                        // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
+                                                        smsIntent.putExtra("sms_body", "i am in a police encounter at " + cityName);
+                                                        startActivity(smsIntent);
+                                                    }
+                                                    else{
+
+                                                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
+                                                        builder2.setMessage("map is not enabled");
+                                                        builder2.setCancelable(true);
+                                                        AlertDialog alertuser = builder2.create();
+                                                        alertuser.show();
+                                                    }
+
+                                                }
+                                            });
+                                    AlertDialog alert12 = builder1.create();
+                                    alert12.show();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Call",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                    builder1.setMessage("Who do you want to call?");
+                                    builder1.setCancelable(true);
+
+                                    builder1.setPositiveButton(
+                                            "Call",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                                                    startActivity(intent);
+
+                                                    Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                                                    startActivity(callIntent);
+
+                                                }
+                                            });
+                                    AlertDialog alert12 = builder1.create();
+                                    alert12.show();
+                                }
+                            });
+
+                    builder1.setNeutralButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
 
                 }
+
             });
         }
     }

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 
 public class DetailedSetting extends AppCompatActivity {
 
@@ -32,7 +35,10 @@ public class DetailedSetting extends AppCompatActivity {
     public static final int PICK_CONTACT = 1;
     MyDBHandler dbHandler;
     ImageView deletebutton;
-    CheckBox smscheckbox;
+ //   CheckBox smscheckbox;
+  //  CheckBox callcheckbox;
+
+
     public String product;
 
 
@@ -50,18 +56,6 @@ public class DetailedSetting extends AppCompatActivity {
 
     }
 
-    public void printDatabase() {
-
-        String dbString = dbHandler.databaseToString();
-        addcontact.setText(dbString);
-
-
-    }
-
-    public void saveInfo(View view) {
-
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -94,8 +88,19 @@ public class DetailedSetting extends AppCompatActivity {
                         }
                         String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-                        Whereyatt whereyatt = new Whereyatt(name);
-                        dbHandler.addContact(whereyatt);
+                        MyDBHandler db = new MyDBHandler(this,null, null, 1);
+
+                        db.addContact(new Whereyatt(name,cNumber));
+
+
+                        //police sms checkbox
+
+
+
+
+
+                        //  Whereyatt whereyatt = new Whereyatt(name);
+                        //dbHandler.addContact(whereyatt);
                         //  printDatabase();
 
 //                        printDatabase();
@@ -142,18 +147,24 @@ public class DetailedSetting extends AppCompatActivity {
 
 
         dbHandler = new MyDBHandler(this, null, null, 1);
-//      printDatabase();
 
-
-        // dbHandler = new MyDBHandler(this, null, null, 1);
-        //  printDatabase();
-       // Intent i = getIntent();
-        // getting attached intent data
-        // String product = i.getStringExtra("product");
-        // displaying selected product name
-        //txtProduct.setText(product);
         final CheckBox smscheckbox = (CheckBox) findViewById(R.id.smschek);
+        final CheckBox callcheckbox = (CheckBox) findViewById(R.id.callchek);
 
+        MyDBHandler db1 = new MyDBHandler(this,null, null, 1);
+
+       List<Whereyatt> contacts = db1.getAllContacts();
+
+
+
+         ListView mohsinsListView = (ListView) findViewById(R.id.listView2);
+
+
+
+
+      ListAdapter mohsinsAdapter2 = new CustomAdapter2(this, contacts);
+        mohsinsListView.setAdapter(mohsinsAdapter2);
+        // String data;
 
         Intent i = getIntent();
         // getting attached intent data
@@ -165,20 +176,25 @@ public class DetailedSetting extends AppCompatActivity {
         boolean checksmspolice = sharedpref3.getBoolean("policesms",false);
         if(product.equals("Police Encounter")&&checksmspolice){
 
-
-
-
-            smscheckbox.setChecked(true);
-
-
-
+           smscheckbox.setChecked(true);
 
         }
         else {
             smscheckbox.setChecked(false);
+        }
 
+        boolean checkcallpolice = sharedpref3.getBoolean("policecall",false);
+
+
+        if(product.equals("Police Encounter")&&checkcallpolice){
+
+            callcheckbox.setChecked(true);
 
         }
+        else {
+            callcheckbox.setChecked(false);
+        }
+
 
 
         smscheckbox.setOnClickListener(new View.OnClickListener() {
@@ -188,42 +204,51 @@ public class DetailedSetting extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpref.edit();
+                //police sms checkbox
                 if(smscheckbox.isChecked()&&product.equals("Police Encounter")){
                     editor.putBoolean("policesms", true);
                     editor.commit();
 
-                    boolean boopolice = sharedpref.getBoolean("policesms",false);
-
-
-                    Toast.makeText(getApplicationContext(),Boolean.toString(boopolice),Toast.LENGTH_SHORT).show();
-
-
-                    System.out.println("Checked");
                 }else if(smscheckbox.isChecked()==false&&product.equals("Police Encounter")){
-                    System.out.println("Un-Checked");
                     editor.putBoolean("policesms", false);
-
-
-                    editor.putString("string2", "this is the string");
                     editor.commit();
-                   // Toast.makeText(getApplicationContext(),"not ticked",Toast.LENGTH_SHORT).show();
-                    boolean boopolice1 = sharedpref.getBoolean("policesms",false);
-
-                    Toast.makeText(getApplicationContext(),Boolean.toString(boopolice1),Toast.LENGTH_SHORT).show();
+                }
 
 
+
+
+
+            }
+        });
+
+        callcheckbox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpref.edit();
+                //police sms checkbox
+                if(callcheckbox.isChecked()&&product.equals("Police Encounter")){
+                    editor.putBoolean("policecall", true);
+                    editor.commit();
+
+                }else if(callcheckbox.isChecked()==false&&product.equals("Police Encounter")){
+                    editor.putBoolean("policecall", false);
+                    editor.commit();
+                }
+
+
+                else if(callcheckbox.isChecked()&&product.equals("Lonely")){
+                 /*   editor.putBoolean("lonelycall", true);
+                    editor.commit();
+                    */
 
                 }
-                else if(smscheckbox.isChecked()&&product.equals("Lonely")){
-                    System.out.println("Un-Checked");
-                    Toast.makeText(getApplicationContext(),"ticked",Toast.LENGTH_SHORT).show();
-
-
-                }
-                else if(smscheckbox.isChecked()==false&&product.equals("Lonely")){
-                    System.out.println("Un-Checked");
-                    Toast.makeText(getApplicationContext(),"not ticked",Toast.LENGTH_SHORT).show();
-
+                else if(callcheckbox.isChecked()==false&&product.equals("Lonely")){
+                 /*   editor.putBoolean("lonelycall", false);
+                    editor.commit();#
+                    */
 
                 }
 
