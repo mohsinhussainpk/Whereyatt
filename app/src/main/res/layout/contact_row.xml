@@ -62,6 +62,7 @@
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
             android:id="@+id/delete"
+            android:onClick="onClick"
             />
 
 

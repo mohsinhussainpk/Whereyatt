@@ -7,9 +7,12 @@ import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -32,19 +35,46 @@ class CustomAdapter2 extends ArrayAdapter {
     }
 
 
+
+
+
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater mohsinsInflater = LayoutInflater.from(getContext());
-        View customView = mohsinsInflater.inflate(R.layout.contact_row, parent, false);
+        final View customView = mohsinsInflater.inflate(R.layout.contact_row, parent, false);
 
-/*
+
+        /*
 
          ImageView phoneImage = (ImageView) customView.findViewById(R.id.contact_layout);
          TextView name = (TextView) customView.findViewById(R.id.contact_name);
         TextView phonenum = (TextView) customView.findViewById(R.id.contact_num);
         nametodelete= (String) name.getText();
 */
-        ImageView deleteImage =  (ImageView) customView.findViewById(R.id.delete);
+
+ /*       lv.setAdapter(new ArrayAdapter<Country>(
+                this,R.layout.list_black_text,R.id.list_content, values));
+*/
+
+        final ImageView deleteImage =  (ImageView) customView.findViewById(R.id.delete);
+        deleteImage.setTag(Integer.valueOf(position));
+        final TextView text = (TextView) customView.findViewById(R.id.contact_name);
+
+        deleteImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "ImageView clicked for the row = "+view.getTag().toString(), Toast.LENGTH_SHORT).show();
+                MyDBHandler db1 = new MyDBHandler(getContext(),null, null, 1);
+
+
+                String name= (String) text.getText();
+                db1.removeSingleContact(name);
+
+            }
+        });
 
         final Whereyatt gettingidtodeleterow = new Whereyatt();
         deleteImage.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +101,7 @@ View v = convertView;
             vi = LayoutInflater.from(getContext());
             v = vi.inflate(R.layout.contact_row, null);
         }
+
 
         Whereyatt whereyatt = new Whereyatt();
          whereyatt  = (Whereyatt) getItem(position);

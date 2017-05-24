@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -160,9 +161,24 @@ public class DetailedSetting extends AppCompatActivity {
          ListView mohsinsListView = (ListView) findViewById(R.id.listView2);
 
 
+        if (mohsinsListView != null) {
+            mohsinsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
 
 
-      ListAdapter mohsinsAdapter2 = new CustomAdapter2(this, contacts);
+                    TextView textView = (TextView) view.findViewById(R.id.contact_name);
+                    String text = textView.getText().toString();
+                    MyDBHandler db1 = new MyDBHandler(DetailedSetting.this ,null, null, 1);
+
+                    db1.removeSingleContact(text);
+                    System.out.println("Choosen Country = : " + text);
+
+                }});
+
+        }
+
+        ListAdapter mohsinsAdapter2 = new CustomAdapter2(this, contacts);
         mohsinsListView.setAdapter(mohsinsAdapter2);
         // String data;
 

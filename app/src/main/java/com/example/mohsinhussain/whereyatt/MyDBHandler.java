@@ -66,6 +66,18 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    public void removeSingleContact(String title) {
+        //Open the database
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        //Execute sql query to remove from database
+        //NOTE: When removing by String in SQL, value must be enclosed with ''
+        database.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_CONTACTS_NAME + "= '" + title + "'");
+
+        //Close the database
+        database.close();
+    }
+
     public List<Whereyatt> getAllContacts() {
         List<Whereyatt> contactList = new ArrayList<Whereyatt>();
         // Select All Query
