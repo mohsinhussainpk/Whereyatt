@@ -24,7 +24,8 @@
         </activity>
         <activity android:name=".Setting" />
         <activity android:name=".DetailedSetting" />
-        <activity android:name=".MessageSend"></activity>
+        <activity android:name=".MessageSend" />
+        <activity android:name=".CallSend"></activity>
     </application>
 
 </manifest>

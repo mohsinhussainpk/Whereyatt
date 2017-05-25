@@ -91,29 +91,28 @@ public class MainActivity extends AppCompatActivity {
             });
 
             policeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                                                @Override
+                                                public void onClick(View v) {
 
 
-                    //  AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+                                                    //  AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
 
-                    //  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
-
-
-
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-                    builder1.setMessage("Do you want to?");
-                    builder1.setCancelable(true);
-
-                    builder1.setPositiveButton(
-                            "Message",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
+                                                    //  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
 
 
-                                    Intent intent = new Intent(MainActivity.this, MessageSend.class);
-                                    intent.putExtra("product",police);
-                                    startActivity(intent);
+                                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                                                    builder1.setMessage("Do you want to?");
+                                                    builder1.setCancelable(true);
+
+                                                    builder1.setPositiveButton(
+                                                            "Message",
+                                                            new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog, int id) {
+
+
+                                                                    Intent intent = new Intent(MainActivity.this, MessageSend.class);
+                                                                    intent.putExtra("product", police);
+                                                                    startActivity(intent);
                                     /*
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
                                     builder1.setMessage("Who do you want to call?");
@@ -151,47 +150,33 @@ public class MainActivity extends AppCompatActivity {
                                             });
                                     AlertDialog alert12 = builder1.create();
                                     alert12.show();
-                               */ }
-                            });
+                               */
+                                                                }
+                                                            });
 
-                    builder1.setNegativeButton(
-                            "Call",
+                                                    builder1.setNegativeButton(
+                                                            "Call",
 
+                                                            new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog, int id) {
+                                                                    Intent intent = new Intent(MainActivity.this, CallSend.class);
+                                                                    intent.putExtra("product", police);
+                                                                    startActivity(intent);
+                                                                }
+                                                            }
+                                                    );
+                                                    builder1.setNeutralButton("Cancel",
+                                                            new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog, int id) {
+                                                                    dialog.cancel();
+                                                                }
+                                                            });
 
-
-                                            new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-
-                                                    boolean boopolice = sharedpref1.getBoolean("policecall",false);
-                                                    if(boopolice) {
-                                                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
-                                                        startActivity(intent);
-
-                                                        Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
-
-                                                        startActivity(callIntent);
-                                                    }
-                                                    else{
-                                                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
-                                                        builder2.setMessage("call is not enabled");
-                                                        builder2.setCancelable(true);
-                                                        AlertDialog alertuser = builder2.create();
-                                                        alertuser.show();
-
-                                                    }
-
+                                                    AlertDialog alert11 = builder1.create();
+                                                    alert11.show();
                                                 }
                                             });
-                                   
 
-
-
-
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
-
-                }
-            });
             lonelyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
