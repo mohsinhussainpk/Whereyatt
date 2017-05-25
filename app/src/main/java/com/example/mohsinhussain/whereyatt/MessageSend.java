@@ -48,12 +48,18 @@ public class MessageSend extends AppCompatActivity {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    TextView textView = (TextView) findViewById(R.id.contact_number);
+
+                    TextView textView = (TextView) view.findViewById(R.id.contact_number);
                      String text = textView.getText().toString();
+  //                  System.out.println("Choosen Country = : " + text);
+
+
                     if(boopolice&&police.equals(product)) {
 
 
-                        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+
+                        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
                         smsIntent.setType("vnd.android-dir/mms-sms");
                         smsIntent.putExtra("address", text);
                         // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
