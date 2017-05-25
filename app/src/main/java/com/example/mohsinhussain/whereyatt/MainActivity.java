@@ -223,34 +223,14 @@ public class MainActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int id) {
 
 
-                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-                                    builder1.setMessage("Who do you want to call?");
-                                    builder1.setCancelable(true);
-
-
-                                    builder1.setPositiveButton(
-                                            "Message",
-                                            new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-
-                                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-                                                    builder1.setMessage("Do you want to?");
-                                                    builder1.setCancelable(true);
-
-
-                                                        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
-                                                        smsIntent.setType("vnd.android-dir/mms-sms");
-                                                        smsIntent.putExtra("address", "090078601");
-                                                        // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
-                                                        smsIntent.putExtra("sms_body", "i am in a police encounter at " + cityName);
-                                                        startActivity(smsIntent);
+                                    Intent intent = new Intent(MainActivity.this, MessageSend.class);
+                                    intent.putExtra("product",lonely);
+                                    startActivity(intent);
 
 
 
-                                                }
-                                            });
-                                    AlertDialog alert12 = builder1.create();
-                                    alert12.show();
+
+
                                 }
                             });
 

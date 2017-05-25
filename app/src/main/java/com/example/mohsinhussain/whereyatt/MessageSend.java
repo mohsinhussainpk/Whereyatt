@@ -42,6 +42,7 @@ public class MessageSend extends AppCompatActivity {
 
 
         final boolean boopolice = sharedpref1.getBoolean("policesms",false);
+        final boolean boolonely = sharedpref1.getBoolean("lonelysms",false);
 
             messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -50,31 +51,50 @@ public class MessageSend extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     TextView textView = (TextView) view.findViewById(R.id.contact_number);
-                     String text = textView.getText().toString();
-  //                  System.out.println("Choosen Country = : " + text);
+                    String text = textView.getText().toString();
+                    //                  System.out.println("Choosen Country = : " + text);
+
+                    if (lonely.equals(product)) {
+
+                        if (boopolice) {
 
 
-                    if(boopolice&&police.equals(product)) {
+                            Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                            smsIntent.setType("vnd.android-dir/mms-sms");
+                            smsIntent.putExtra("address", text);
+                            // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
+                            smsIntent.putExtra("sms_body", "i am in a police encounter at police ");
+                            startActivity(smsIntent);
+                        } else {
+
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(MessageSend.this);
+                            builder2.setMessage("map is not enabled");
+                            builder2.setCancelable(true);
+                            AlertDialog alertuser = builder2.create();
+                            alertuser.show();
+                        }
 
 
-
-
-                        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-                        smsIntent.setType("vnd.android-dir/mms-sms");
-                        smsIntent.putExtra("address", text);
-                        // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
-                        smsIntent.putExtra("sms_body", "i am in a police encounter at police ");
-                        startActivity(smsIntent);
                     }
-                    else{
+                    if (police.equals(product)) {
+                        if (boolonely) {
 
-                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MessageSend.this);
-                        builder2.setMessage("map is not enabled");
-                        builder2.setCancelable(true);
-                        AlertDialog alertuser = builder2.create();
-                        alertuser.show();
+
+                            Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                            smsIntent.setType("vnd.android-dir/mms-sms");
+                            smsIntent.putExtra("address", text);
+                            // smsIntent.putExtra("sms_body", "i am in a police encounter at" + cityName);
+                            smsIntent.putExtra("sms_body", "i am lonely ");
+                            startActivity(smsIntent);
+                        } else {
+
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(MessageSend.this);
+                            builder2.setMessage("map is not enabled");
+                            builder2.setCancelable(true);
+                            AlertDialog alertuser = builder2.create();
+                            alertuser.show();
+                        }
                     }
-
                 }
             });
 
