@@ -42,8 +42,12 @@ public class CallSend extends AppCompatActivity {
         SharedPreferences sharedpref1 = getSharedPreferences("permission", Context.MODE_PRIVATE);
 
 
-        final boolean boopolice = sharedpref1.getBoolean("policesms",false);
-        final boolean boolonely = sharedpref1.getBoolean("lonelysms",false);
+        final boolean boopolice = sharedpref1.getBoolean("policecall",false);
+        final boolean boolonely = sharedpref1.getBoolean("lonelycall",false);
+        final boolean boolit = sharedpref1.getBoolean("litcall",false);
+        final boolean booscared = sharedpref1.getBoolean("scaredcall",false);
+        final boolean boocustom = sharedpref1.getBoolean("customcall",false);
+
 
         messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -55,8 +59,8 @@ public class CallSend extends AppCompatActivity {
                 String text = textView.getText().toString();
                 //                  System.out.println("Choosen Country = : " + text);
 
-                if (lonely.equals(product)) {
-
+              //  if (lonely.equals(product)) {
+                if (police.equals(product)) {
                     if (boopolice) {
 
 
@@ -66,8 +70,7 @@ public class CallSend extends AppCompatActivity {
                         Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
 
                         startActivity(callIntent);
-                    }
-                    else{
+                    } else {
                         android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(CallSend.this);
                         builder2.setMessage("call is not enabled");
                         builder2.setCancelable(true);
@@ -76,11 +79,13 @@ public class CallSend extends AppCompatActivity {
 
                     }
 
-
-
                 }
-                if (police.equals(product)) {
-                    if (boolonely) {
+
+               // }
+             //   if (police.equals(product)) {
+                if (lit.equals(product)) {
+
+                    if (boolit) {
 
 
                         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
@@ -89,8 +94,7 @@ public class CallSend extends AppCompatActivity {
                         Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
 
                         startActivity(callIntent);
-                    }
-                    else{
+                    } else {
                         android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(CallSend.this);
                         builder2.setMessage("call is not enabled");
                         builder2.setCancelable(true);
@@ -99,6 +103,69 @@ public class CallSend extends AppCompatActivity {
 
                     }
                 }
+                if (scared.equals(product)) {
+
+                    if (booscared) {
+
+
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                        startActivity(intent);
+
+                        Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                        startActivity(callIntent);
+                    } else {
+                        android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(CallSend.this);
+                        builder2.setMessage("call is not enabled");
+                        builder2.setCancelable(true);
+                        android.app.AlertDialog alertuser = builder2.create();
+                        alertuser.show();
+
+                    }
+                }
+                if (custom.equals(product)) {
+
+                    if (boocustom) {
+
+
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                        startActivity(intent);
+
+                        Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                        startActivity(callIntent);
+                    } else {
+                        android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(CallSend.this);
+                        builder2.setMessage("call is not enabled");
+                        builder2.setCancelable(true);
+                        android.app.AlertDialog alertuser = builder2.create();
+                        alertuser.show();
+
+                    }
+                }
+            if (lonely.equals(product))
+
+            {
+
+                if (boolonely) {
+
+
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                    startActivity(intent);
+
+                    Intent callIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                    startActivity(callIntent);
+                } else {
+                    android.app.AlertDialog.Builder builder2 = new android.app.AlertDialog.Builder(CallSend.this);
+                    builder2.setMessage("call is not enabled");
+                    builder2.setCancelable(true);
+                    android.app.AlertDialog alertuser = builder2.create();
+                    alertuser.show();
+
+                }
+            }
+               // }
             }
         });
 

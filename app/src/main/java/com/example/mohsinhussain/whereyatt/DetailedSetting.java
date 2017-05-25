@@ -239,7 +239,7 @@ if(product.equals("Police Encounter")) {
                 editor.putBoolean("policesms", true);
                 editor.commit();
 
-            }else if(smscheckbox.isChecked()==false){
+            }else {
                 editor.putBoolean("policesms", false);
                 editor.commit();
             }
@@ -263,7 +263,7 @@ if(product.equals("Police Encounter")) {
                 editor.putBoolean("policecall", true);
                 editor.commit();
 
-            }else if(callcheckbox.isChecked()==false){
+            }else {
                 editor.putBoolean("policecall", false);
                 editor.commit();
             }
@@ -312,7 +312,7 @@ if(product.equals("Police Encounter")) {
                         editor.putBoolean("lonelysms", true);
                         editor.commit();
 
-                    }else if(smscheckbox.isChecked()==false){
+                    }else{
                         editor.putBoolean("lonelysms", false);
                         editor.commit();
                     }
@@ -336,7 +336,7 @@ if(product.equals("Police Encounter")) {
                         editor.putBoolean("lonelycall", true);
                         editor.commit();
 
-                    }else if(callcheckbox.isChecked()==false){
+                    }else{
                         editor.putBoolean("lonelycall", false);
                         editor.commit();
                     }
@@ -348,39 +348,228 @@ if(product.equals("Police Encounter")) {
 
         }
 
+        //for lit
+        if(product.equals("its Lit")) {
+            SharedPreferences sharedpref3 = getSharedPreferences("permission", Context.MODE_PRIVATE);
 
-        /*
-        smscheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            boolean checksmslit = sharedpref3.getBoolean("litsms", false);
 
-                                                   @Override
-                                                   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+            if (checksmslit) {
 
-                                                       SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
+                smscheckbox.setChecked(true);
 
-
-                                                       SharedPreferences.Editor editor = sharedpref.edit();
-
-                                                       if(product=="Police Encounter") {
-
-                                                           editor.putBoolean("sendmappolice", true);
-                                                           Toast.makeText(getApplicationContext(), "ticked", Toast.LENGTH_LONG).show();
-                                                           editor.apply();
-
-                                                       }
-                                                       else{
-                                                           editor.putBoolean("sendmappolice", false);
-                                                           Toast.makeText(getApplicationContext(),"not ticked",Toast.LENGTH_LONG).show();
-                                                       }
+            } else {
+                smscheckbox.setChecked(false);
+            }
 
 
+            boolean checkcalllit = sharedpref3.getBoolean("litcall", false);
 
 
-                                                   }
-                                               }
-        );
+            if (checkcalllit) {
 
-*/
+                callcheckbox.setChecked(true);
 
+            } else {
+                callcheckbox.setChecked(false);
+            }
+
+            smscheckbox.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpref.edit();
+                    //police sms checkbox
+                    if(smscheckbox.isChecked()){
+                        editor.putBoolean("litsms", true);
+                        editor.commit();
+
+                    }else{
+                        editor.putBoolean("litsms", false);
+                        editor.commit();
+                    }
+
+
+
+
+
+                }
+            });
+
+            callcheckbox.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpref.edit();
+                    //police sms checkbox
+                    if(callcheckbox.isChecked()){
+                        editor.putBoolean("litcall", true);
+                        editor.commit();
+
+                    }else{
+                        editor.putBoolean("litcall", false);
+                        editor.commit();
+                    }
+
+
+
+                }
+            });
+
+        }
+
+
+        //for scared
+        if(product.equals("Scared")) {
+            SharedPreferences sharedpref3 = getSharedPreferences("permission", Context.MODE_PRIVATE);
+
+            boolean checksmsscared = sharedpref3.getBoolean("scaredsms", false);
+
+            if (checksmsscared) {
+
+                smscheckbox.setChecked(true);
+
+            } else {
+                smscheckbox.setChecked(false);
+            }
+
+
+            boolean checkcallscared = sharedpref3.getBoolean("scaredcall", false);
+
+
+            if (checkcallscared) {
+
+                callcheckbox.setChecked(true);
+
+            } else {
+                callcheckbox.setChecked(false);
+            }
+
+            smscheckbox.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpref.edit();
+                    //police sms checkbox
+                    if(smscheckbox.isChecked()){
+                        editor.putBoolean("scaredsms", true);
+                        editor.commit();
+
+                    }else{
+                        editor.putBoolean("scaredsms", false);
+                        editor.commit();
+                    }
+
+
+
+
+
+                }
+            });
+
+            callcheckbox.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpref.edit();
+                    //police sms checkbox
+                    if(callcheckbox.isChecked()){
+                        editor.putBoolean("scaredcall", true);
+                        editor.commit();
+
+                    }else{
+                        editor.putBoolean("scaredcall", false);
+                        editor.commit();
+                    }
+
+
+
+                }
+            });
+
+        }
+
+        //for custom
+        if(product.equals("custom")) {
+            SharedPreferences sharedpref3 = getSharedPreferences("permission", Context.MODE_PRIVATE);
+
+            boolean checksmscustom = sharedpref3.getBoolean("customsms", false);
+
+            if (checksmscustom) {
+
+                smscheckbox.setChecked(true);
+
+            } else {
+                smscheckbox.setChecked(false);
+            }
+
+
+            boolean checkcallcustom = sharedpref3.getBoolean("customcall", false);
+
+
+            if (checkcallcustom) {
+
+                callcheckbox.setChecked(true);
+
+            } else {
+                callcheckbox.setChecked(false);
+            }
+
+            smscheckbox.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpref.edit();
+                    //police sms checkbox
+                    if(smscheckbox.isChecked()){
+                        editor.putBoolean("customsms", true);
+                        editor.commit();
+
+                    }else{
+                        editor.putBoolean("customsms", false);
+                        editor.commit();
+                    }
+
+
+
+
+
+                }
+            });
+
+            callcheckbox.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    SharedPreferences sharedpref = getSharedPreferences("permission", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpref.edit();
+                    //police sms checkbox
+                    if(callcheckbox.isChecked()){
+                        editor.putBoolean("customcall", true);
+                        editor.commit();
+
+                    }else{
+                        editor.putBoolean("customcall", false);
+                        editor.commit();
+                    }
+
+
+
+                }
+            });
+
+        }
 
     }
 
