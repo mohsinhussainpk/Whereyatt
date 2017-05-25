@@ -156,14 +156,9 @@ public class MainActivity extends AppCompatActivity {
 
                     builder1.setNegativeButton(
                             "Call",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-                                    builder1.setMessage("Who do you want to call?");
-                                    builder1.setCancelable(true);
 
-                                    builder1.setPositiveButton(
-                                            "Call",
+
+
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
 
@@ -187,17 +182,10 @@ public class MainActivity extends AppCompatActivity {
 
                                                 }
                                             });
-                                    AlertDialog alert12 = builder1.create();
-                                    alert12.show();
-                                }
-                            });
+                                   
 
-                    builder1.setNeutralButton("Cancel",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
+
+
 
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
