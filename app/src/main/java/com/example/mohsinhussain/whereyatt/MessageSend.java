@@ -18,7 +18,7 @@ public class MessageSend extends AppCompatActivity {
 
     public String police = "Police Encounter";
     public String lonely = "Lonely";
-    public String lit = "it's Lit";
+    public String lit = "its Lit";
     public String scared = "Scared";
     public String custom = "custom";
     String product;
@@ -34,7 +34,7 @@ public class MessageSend extends AppCompatActivity {
         // getting attached intent data
         product = i.getStringExtra("product");
 
-        List<Whereyatt> contactspolice = db1.getAllContacts();
+        List<Whereyatt> contactspolice = db1.getPoliceContacts(product);
 
         ListAdapter mohsinsAdapter3 = new CustomAdapter3(this, contactspolice);
         messageListView.setAdapter(mohsinsAdapter3);

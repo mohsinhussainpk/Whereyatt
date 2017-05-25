@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 11;
     private static final String DATABASE_NAME = "name.db";
     public static final String TABLE_NAME = "nameof";
     public static final String COLUMN_ID = "_id";
@@ -129,6 +129,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 whereyatt.set_id(Integer.parseInt(cursor1.getString(0)));
                 whereyatt.set_contactname(cursor1.getString(1));
                 whereyatt.set_contactnumber(cursor1.getString(2));
+                whereyatt.set_category(cursor1.getString(3));
+
                 //contact.setID(Integer.parseInt(cursor.getString(0)));
                 //   contact.setName(cursor.getString(1));
                 //   contact.setPhoneNumber(cursor.getString(2));

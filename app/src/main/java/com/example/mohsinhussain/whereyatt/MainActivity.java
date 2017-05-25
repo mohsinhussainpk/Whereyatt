@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public String police = "Police Encounter";
     public String lonely = "Lonely";
-    public String lit = "it's Lit";
+    public String lit = "its Lit";
     public String scared = "Scared";
     public String custom = "custom";
 

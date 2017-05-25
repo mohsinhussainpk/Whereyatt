@@ -15,7 +15,7 @@ public class Setting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        String [] foods = {"Police Encounter", "Lonely", "it's Lit", "Scared", "custom"};
+        String [] foods = {"Police Encounter", "Lonely", "its Lit", "Scared", "custom"};
 
         ListAdapter mohsinsAdapter = new CustomAdapter(this, foods);
 

@@ -154,7 +154,11 @@ public class DetailedSetting extends AppCompatActivity {
 
         MyDBHandler db1 = new MyDBHandler(this,null, null, 1);
 
-       List<Whereyatt> contacts = db1.getAllContacts();
+        Intent i = getIntent();
+        // getting attached intent data
+        product = i.getStringExtra("product");
+
+       List<Whereyatt> contacts = db1.getPoliceContacts(product);
 
 
 
@@ -182,9 +186,7 @@ public class DetailedSetting extends AppCompatActivity {
         mohsinsListView.setAdapter(mohsinsAdapter2);
         // String data;
 
-        Intent i = getIntent();
-        // getting attached intent data
-        product = i.getStringExtra("product");
+
 
 
         SharedPreferences sharedpref3 = getSharedPreferences("permission", Context.MODE_PRIVATE);
