@@ -66,31 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         MyDBHandler db1 = new MyDBHandler(this,null, null, 1);
-        db1.addContact(new Whereyatt("Ravi", "9100000000"));
 
 
 
 
-        GPSTracker gpsTracker = new GPSTracker(this);
-        String stringLatitude, stringLongitude;
-        String nameOfLocation = "";
-        if (gpsTracker.canGetLocation()) {
-            stringLatitude = String.valueOf(gpsTracker.latitude);
-            stringLongitude = String.valueOf(gpsTracker.longitude);
-            // getting city from latitude, longitude values
-            double lat = Double.parseDouble(stringLatitude);
-            double longi = Double.parseDouble(stringLongitude);
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            List<Address> addresses = null;
-            try {
-                addresses = geocoder.getFromLocation(lat, longi, 1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //String stateName = "lahore";
 
-//            cityName = addresses.get(0).getAddressLine(0);
-cityName = "karachi";
 
 
             // String stateName = addresses.get(0).getAddressLine(1);
@@ -114,10 +94,12 @@ cityName = "karachi";
                 @Override
                 public void onClick(View v) {
 
+
                     //  AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
-                    Activity mActivity = null;
 
                     //  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+
+
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
                     builder1.setMessage("Do you want to?");
@@ -129,6 +111,10 @@ cityName = "karachi";
                                 public void onClick(DialogInterface dialog, int id) {
 
 
+                                    Intent intent = new Intent(MainActivity.this, MessageSend.class);
+                                    intent.putExtra("product",police);
+                                    startActivity(intent);
+                                    /*
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
                                     builder1.setMessage("Who do you want to call?");
                                     builder1.setCancelable(true);
@@ -165,7 +151,7 @@ cityName = "karachi";
                                             });
                                     AlertDialog alert12 = builder1.create();
                                     alert12.show();
-                                }
+                               */ }
                             });
 
                     builder1.setNegativeButton(
@@ -605,4 +591,4 @@ cityName = "karachi";
     }
 
 
-}
+

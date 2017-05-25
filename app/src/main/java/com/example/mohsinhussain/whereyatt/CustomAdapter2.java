@@ -123,7 +123,7 @@ View v = convertView;
             }
 
             if (tt3 != null) {
-                tt3.setText(whereyatt.get_contactnumber());
+                tt3.setText(whereyatt.get_category());
             }
         }
 

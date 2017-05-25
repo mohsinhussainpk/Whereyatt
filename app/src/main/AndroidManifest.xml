@@ -16,12 +16,15 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <uses-permission android:name="android.permission.SEND_SMS" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Setting" />
-        <activity android:name=".DetailedSetting"></activity>
+        <activity android:name=".DetailedSetting" />
+        <activity android:name=".MessageSend"></activity>
     </application>
 
 </manifest>

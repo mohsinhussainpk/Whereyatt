@@ -19,7 +19,7 @@ public class Setting extends AppCompatActivity {
 
         ListAdapter mohsinsAdapter = new CustomAdapter(this, foods);
 
-        final ListView mohsinsListView = (ListView) findViewById(R.id.listView);
+         ListView mohsinsListView = (ListView) findViewById(R.id.listView);
 
         mohsinsListView.setAdapter(mohsinsAdapter);
        // String data;

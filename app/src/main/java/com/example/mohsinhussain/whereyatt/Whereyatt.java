@@ -26,9 +26,10 @@ public class Whereyatt {
         this._whereyatt = whereyatt;
     }
 
-    public Whereyatt(String name, String _phone_number){
+    public Whereyatt(String name, String _phone_number, String category){
         this._contactname = name;
         this._contactnumber = _phone_number;
+        this._category = category;
     }
     public int get_id() {
         return _id;

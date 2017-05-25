@@ -91,7 +91,7 @@ public class DetailedSetting extends AppCompatActivity {
 
                         MyDBHandler db = new MyDBHandler(this,null, null, 1);
 
-                        db.addContact(new Whereyatt(name,cNumber));
+                        db.addContact(new Whereyatt(name,cNumber,product));
 
 
                         //police sms checkbox

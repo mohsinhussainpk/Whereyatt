@@ -12,12 +12,14 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 9;
     private static final String DATABASE_NAME = "name.db";
     public static final String TABLE_NAME = "nameof";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_CONTACTS_NAME = "contactname";
     public static final String COLUMN_CONTACTS_NUMBER = "contactnumber";
+    public static final String COLUMN_CATEGORY= "contactcategory";
+
     public static final String COLUMN_PURCHASED = "purchased";
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -30,6 +32,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_NAME + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_CONTACTS_NAME + " TEXT," +
+                COLUMN_CATEGORY + " TEXT," +
                 COLUMN_CONTACTS_NUMBER + " TEXT)";
 
         db.execSQL(query);
@@ -59,6 +62,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_CONTACTS_NAME, whereyatt.get_contactname()); // Contact Name
         values.put(COLUMN_CONTACTS_NUMBER, whereyatt.get_contactnumber()); // Contact Phone
+       values.put(COLUMN_CATEGORY, whereyatt.get_category()); // Contact Category
+
 
         // Inserting Row
         db.insert(TABLE_NAME, null, values);
@@ -93,9 +98,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 whereyatt.set_id(Integer.parseInt(cursor.getString(0)));
                 whereyatt.set_contactname(cursor.getString(1));
                 whereyatt.set_contactnumber(cursor.getString(2));
+                whereyatt.set_category(cursor.getString(3));
                 //contact.setID(Integer.parseInt(cursor.getString(0)));
-             //   contact.setName(cursor.getString(1));
-             //   contact.setPhoneNumber(cursor.getString(2));
+                //   contact.setName(cursor.getString(1));
+                //   contact.setPhoneNumber(cursor.getString(2));
                 // Adding contact to list
                 contactList.add(whereyatt);
             } while (cursor.moveToNext());
@@ -103,7 +109,38 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         // return contact list
         return contactList;
+
     }
+
+
+
+            public List<Whereyatt> getPoliceContacts(String product) {
+        List<Whereyatt> contactList1 = new ArrayList<Whereyatt>();
+        // Select All Query
+        String selectQuery1 = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_CATEGORY + "= '" + product + "'";
+
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        Cursor cursor1 = db1.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor1.moveToFirst()) {
+            do {
+                Whereyatt whereyatt = new Whereyatt();
+                whereyatt.set_id(Integer.parseInt(cursor1.getString(0)));
+                whereyatt.set_contactname(cursor1.getString(1));
+                whereyatt.set_contactnumber(cursor1.getString(2));
+                //contact.setID(Integer.parseInt(cursor.getString(0)));
+                //   contact.setName(cursor.getString(1));
+                //   contact.setPhoneNumber(cursor.getString(2));
+                // Adding contact to list
+                contactList1.add(whereyatt);
+            } while (cursor1.moveToNext());
+        }
+
+        // return contact list
+        return contactList1;
+    }
+
 
     // Deleting single contact
     public void deleteContact(Whereyatt whereyatt) {
